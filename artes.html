@@ -1,11 +1,548 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bim Creates | Artes</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bim inicio.css">
+
+  <style>
+    /* ========== CORES E BASE ========== */
+    :root {
+      --rosa: #ffeff7;
+      --roxo: #dabbe0;
+      --fundo: #7f309e;
+      --texto: #5e3570;
+      --suave: #7a6584;
+      --borda: #2a298f;
+      --marca: #fff1a8;
+      --hover: #593468;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Fredoka", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      background: var(--fundo);
+      color: var(--texto);
+    }
+    a { color: inherit; text-decoration: none; }
+    a:focus-visible, button:focus-visible, input:focus-visible {
+      outline: 3px solid #ae4cbb; outline-offset: 2px;
+    }
+
+    /* ========== CABEÇALHO ========== */
+    .topo {
+      background: linear-gradient(120deg, var(--rosa), var(--roxo));
+      color: #57124d;
+      position: relative;
+      z-index: 20;
+    }
+    .topo-conteudo {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .logo img { display: block; height: 90px; width: 90px; object-fit: contain; }
+
+    .acoes { display: flex; gap: 18px; margin-left: auto; }
+    .acao { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+    .acao img { height: 38px; width: 38px; object-fit: contain; }
+    .acao:hover span { text-decoration: underline; }
+
+    /* ========== BARRA DE BUSCA ========== */
+    .busca { position: relative; flex: 1; max-width: 520px; }
+    .busca-campo {
+      display: flex;
+      background: #fff;
+      border-radius: 999px;
+      padding: 4px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+    }
+    .busca input {
+      flex: 1;
+      min-width: 0;
+      border: 0;
+      background: transparent;
+      padding: 10px 16px;
+      font: inherit;
+      color: var(--texto);
+    }
+    .busca input:focus-visible { outline: none; }
+    .busca-campo:focus-within { outline: 3px solid #935ec5; outline-offset: 2px; }
+    .busca button {
+      border: 0;
+      border-radius: 999px;
+      padding: 0 22px;
+      font: inherit;
+      font-weight: 500;
+      color: #380864;
+      background: var(--rosa);
+      cursor: pointer;
+    }
+    .busca button:hover { background: #8e1757; }
+    .busca button:focus-visible { outline-color: var(--texto); }
+
+    .painel {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 0;
+      right: 0;
+      background: #fff;
+      color: var(--texto);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(60, 10, 70, .25);
+      overflow: hidden;
+    }
+    .painel[hidden] { display: none; }
+    .aviso { margin: 0; padding: 12px 16px; font-size: .9rem; color: var(--suave); }
+    .resultados { list-style: none; margin: 0; padding: 0; max-height: 340px; overflow-y: auto; }
+    .resultados li { border-top: 1px solid var(--borda); }
+    .resultados a { display: block; padding: 12px 16px; }
+    .resultados a:hover, .resultados a:focus { background: var(--hover); outline: none; }
+    .resultados strong { display: block; font-weight: 500; }
+    .resultados span { font-size: .88rem; color: var(--suave); }
+    .resultados mark { background: var(--marca); color: inherit; border-radius: 3px; padding: 0 2px; }
+
+    /* ========== MENU ========== */
+    .menu {
+      list-style: none;
+      margin: 0;
+      padding: 10px 20px 16px;
+      max-width: 1200px;
+      margin-inline: auto;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    .menu a {
+      display: block;
+      padding: 8px 18px;
+      border-radius: 999px;
+      font-weight: 500;
+      background: rgba(255, 255, 255, .16);
+      transition: background .15s;
+    }
+    .menu a:hover { background: rgba(255, 255, 255, .32); }
+    .menu a[aria-current="page"] { background: rgba(255, 255, 255, .45); }
+    .menu img { height: 25px; width: auto; }
+
+    /* ========== CONTEÚDO ========== */
+    main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px; }
+    .titulo-secao {
+      margin: 0 0 24px;
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 600;
+      color: var(--rosa);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .titulo-secao::after { content: ""; flex: 1; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--roxo), transparent); }
+
+    /* ========== GALERIA ESTILO PINTEREST ========== */
+    .galeria {
+      column-count: 4;
+      column-gap: 20px;
+    }
+    .arte {
+      break-inside: avoid;
+      margin: 0 0 20px;
+      background: #fff;
+      border: 2px solid var(--borda);
+      border-radius: 20px;
+      box-shadow: 0 6px 18px rgba(172, 29, 107, .08);
+      overflow: hidden;
+    }
+    .arte button {
+      display: block;
+      width: 100%;
+      padding: 0;
+      border: 0;
+      background: none;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+      cursor: zoom-in;
+    }
+    .arte button:focus-visible { outline-offset: -3px; }
+    .arte img { display: block; width: 100%; height: auto; }
+    .arte figcaption {
+      padding: 10px 14px 12px;
+      font-weight: 500;
+      color: var(--texto);
+    }
+    .arte button:hover figcaption { text-decoration: underline; }
+
+    /* ========== ARTE EXPANDIDA ========== */
+    dialog.expandida {
+      border: 0;
+      padding: 0;
+      background: transparent;
+      max-width: 100vw;
+      max-height: 100vh;
+      width: 100%;
+      height: 100%;
+      color: var(--rosa);
+    }
+    dialog.expandida::backdrop { background: rgba(40, 8, 55, .88); }
+    .expandida-corpo {
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 14px;
+      padding: 56px 64px 24px;
+    }
+    .expandida-corpo img {
+      max-width: 100%;
+      max-height: calc(100vh - 150px);
+      object-fit: contain;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, .4);
+    }
+    .expandida-nome { margin: 0; font-size: 1.4rem; font-weight: 500; text-align: center; }
+    .expandida button {
+      position: absolute;
+      border: 0;
+      border-radius: 999px;
+      background: var(--rosa);
+      color: #380864;
+      font: inherit;
+      font-weight: 600;
+      cursor: pointer;
+      width: 44px;
+      height: 44px;
+      font-size: 1.4rem;
+      line-height: 1;
+    }
+    .expandida button:hover { background: var(--roxo); }
+    .expandida .fechar { top: 14px; right: 14px; }
+    .expandida .anterior, .expandida .proximo { top: 50%; transform: translateY(-50%); }
+    .expandida .anterior { left: 12px; }
+    .expandida .proximo { right: 12px; }
+
+    /* ========== CELULAR ========== */
+    @media (max-width: 1000px) { .galeria { column-count: 3; } }
+    @media (max-width: 760px) {
+      .galeria { column-count: 2; column-gap: 12px; }
+      .arte { margin-bottom: 12px; border-radius: 16px; }
+      .topo-conteudo { flex-wrap: wrap; }
+      .busca { order: 3; flex-basis: 100%; max-width: none; }
+      .logo img { height: 70px; width: 70px; }
+      .expandida-corpo { padding: 64px 12px 16px; }
+      .expandida .anterior, .expandida .proximo { top: auto; bottom: 14px; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) { .menu a { transition: none; } }
+  </style>
 </head>
+
 <body>
-    <h1>hello word</h1>
+<div class="imagemdefundo">
+  <a href="bim creates logos/bacgroud.png"></a>
+</div>
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="logo" href="bim inicio.html">
+        <img src="bim creates logos/4 png.png" alt="Bim Creates, página inicial">
+      </a>
+
+      <!-- Busca funcional -->
+      <div class="busca" role="search">
+        <div class="busca-campo">
+          <input type="search" id="campo-busca" placeholder="Buscar no site" aria-label="Buscar no site" autocomplete="off">
+          <button type="button" id="botao-busca">Buscar</button>
+        </div>
+        <div class="painel" id="painel" hidden>
+          <p class="aviso" id="aviso" aria-live="polite"></p>
+          <ul class="resultados" id="resultados"></ul>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <a class="acao" href="login.html">
+          <img src="bim creates logos/logos/icon login.png" alt="">
+          <span>Login</span>
+        </a>
+        <a class="acao" href="carrinho.html">
+          <img src="bim creates logos/logos/icon carrinho.png" alt="">
+          <span>Carrinho</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <nav aria-label="Menu principal">
+      <ul class="menu">
+        <li><img src="https://em-content.zobj.net/source/animated-noto-color-emoji/461/sparkles_2728.gif" alt=""></li>
+        <li><a href="bim inicio.html">Início</a></li>
+        <li><a href="artes.html" aria-current="page">Artes</a></li>
+        <li><a href="Produtos.html">Produtos</a></li>
+        <li><a href="Encomendas.html">Encomendas</a></li>
+        <li><a href="Downloads.html">Downloads</a></li>
+        <li><a href="Sobre mim.html">Sobre mim</a></li>
+        <li><a href="contatos.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ========== CONTEÚDO ========== -->
+  <main>
+    <h1 class="titulo-secao">Artes</h1>
+
+    <!--
+      COMO ADICIONAR SUAS ARTES:
+      1) Em cada bloco <figure class="arte"> abaixo, troque o src="..." pelo caminho do seu PNG.
+         Sugestão: crie a pasta "bim creates logos/artes/" e coloque seus arquivos lá.
+      2) Troque o alt="..." e o texto dentro de <figcaption> pelo nome da arte.
+      3) Para ter mais espaços, copie um bloco <figure class="arte"> inteiro e cole no final.
+      As imagens podem ter qualquer tamanho: a galeria se organiza sozinha.
+    -->
+    <div class="galeria" id="galeria">
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte1.png" alt="Nome da arte 1" loading="lazy">
+          <figcaption>Nome da arte 1</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte2.png" alt="Nome da arte 2" loading="lazy">
+          <figcaption>Nome da arte 2</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte3.png" alt="Nome da arte 3" loading="lazy">
+          <figcaption>Nome da arte 3</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte4.png" alt="Nome da arte 4" loading="lazy">
+          <figcaption>Nome da arte 4</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte5.png" alt="Nome da arte 5" loading="lazy">
+          <figcaption>Nome da arte 5</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte6.png" alt="Nome da arte 6" loading="lazy">
+          <figcaption>Nome da arte 6</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte7.png" alt="Nome da arte 7" loading="lazy">
+          <figcaption>Nome da arte 7</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte8.png" alt="Nome da arte 8" loading="lazy">
+          <figcaption>Nome da arte 8</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte9.png" alt="Nome da arte 9" loading="lazy">
+          <figcaption>Nome da arte 9</figcaption>
+        </button>
+      </figure>
+
+      <figure class="arte">
+        <button type="button">
+          <img src="bim creates logos/artes/arte10.png" alt="Nome da arte 10" loading="lazy">
+          <figcaption>Nome da arte 10</figcaption>
+        </button>
+      </figure>
+
+    </div>
+  </main>
+
+  <!-- ========== ARTE EXPANDIDA ========== -->
+  <dialog class="expandida" id="expandida" aria-label="Arte expandida">
+    <div class="expandida-corpo">
+      <img id="expandida-img" src="" alt="">
+      <p class="expandida-nome" id="expandida-nome"></p>
+    </div>
+    <button type="button" class="fechar" id="btn-fechar" aria-label="Fechar">&times;</button>
+    <button type="button" class="anterior" id="btn-anterior" aria-label="Arte anterior">&#8249;</button>
+    <button type="button" class="proximo" id="btn-proximo" aria-label="Próxima arte">&#8250;</button>
+  </dialog>
+
+  <!-- ========== SCRIPTS (sempre no final) ========== -->
+  <script>
+    /* ---------- Galeria: imagem de reserva enquanto o PNG não existe ---------- */
+    const proporcoes = [[400, 520], [400, 400], [400, 600], [400, 460], [400, 560]];
+    document.querySelectorAll(".arte img").forEach((img, i) => {
+      img.addEventListener("error", () => {
+        const [w, h] = proporcoes[i % proporcoes.length];
+        const svg =
+          '<svg xmlns="http://www.w3.org/2000/svg" width="' + w + '" height="' + h + '">' +
+          '<rect width="100%" height="100%" fill="#f1def5"/>' +
+          '<text x="50%" y="50%" fill="#7f309e" font-family="sans-serif" font-size="22" text-anchor="middle">Sua arte aqui</text></svg>';
+        img.src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg);
+      }, { once: true });
+    });
+
+    /* ---------- Galeria: abrir a arte expandida ---------- */
+    const caixa = document.getElementById("expandida");
+    const caixaImg = document.getElementById("expandida-img");
+    const caixaNome = document.getElementById("expandida-nome");
+    let atual = 0;
+
+    function artes() { return Array.from(document.querySelectorAll(".arte")); }
+
+    function mostrar(indice) {
+      const lista = artes();
+      atual = (indice + lista.length) % lista.length;
+      const card = lista[atual];
+      caixaImg.src = card.querySelector("img").src;
+      caixaImg.alt = card.querySelector("img").alt;
+      caixaNome.textContent = card.querySelector("figcaption").textContent;
+    }
+    function abrir(indice) {
+      mostrar(indice);
+      if (!caixa.open) caixa.showModal();
+    }
+
+    document.getElementById("galeria").addEventListener("click", e => {
+      const card = e.target.closest(".arte");
+      if (card) abrir(artes().indexOf(card));
+    });
+    document.getElementById("btn-fechar").addEventListener("click", () => caixa.close());
+    document.getElementById("btn-anterior").addEventListener("click", () => mostrar(atual - 1));
+    document.getElementById("btn-proximo").addEventListener("click", () => mostrar(atual + 1));
+
+    /* clicar fora da imagem (no fundo) também fecha */
+    caixa.addEventListener("click", e => {
+      if (e.target === caixa || e.target.classList.contains("expandida-corpo")) caixa.close();
+    });
+    caixa.addEventListener("keydown", e => {
+      if (e.key === "ArrowLeft") mostrar(atual - 1);
+      if (e.key === "ArrowRight") mostrar(atual + 1);
+    });
+
+    /* ---------- Busca ---------- */
+
+    /* 1) DADOS DA BUSCA: edite e acrescente o que quiser.
+          "palavras" são termos extras que também levam ao resultado. */
+    const dados = [
+      { titulo: "Início",      descricao: "Página inicial da Bim Creates.",          url: "bim inicio.html", palavras: "home principal" },
+      { titulo: "Artes",       descricao: "Galeria com as artes e ilustrações.",     url: "artes.html",      palavras: "ilustracao desenho galeria" },
+      { titulo: "Produtos",    descricao: "Veja os produtos disponíveis.",           url: "Produtos.html",   palavras: "loja comprar" },
+      { titulo: "Encomendas",  descricao: "Peça uma arte ou produto personalizado.", url: "Encomendas.html", palavras: "pedido personalizado comissao" },
+      { titulo: "Downloads",   descricao: "Arquivos para baixar.",                   url: "Downloads.html",  palavras: "baixar wallpaper arquivos" },
+      { titulo: "Sobre mim",   descricao: "Conheça a artista por trás da marca.",    url: "Sobre mim.html",  palavras: "quem sou historia artista" },
+      { titulo: "Contatos",    descricao: "Fale comigo por redes sociais ou e-mail.", url: "contatos.html",  palavras: "contato email instagram whatsapp" },
+      { titulo: "Login",       descricao: "Entre na sua conta.",                     url: "login.html",      palavras: "entrar conta minha conta" },
+      { titulo: "Carrinho",    descricao: "Veja os itens do seu carrinho.",          url: "carrinho.html",   palavras: "compras pedido" },
+      { titulo: "Print: Bode",       descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "bode print" },
+      { titulo: "Print: Leite",      descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "leite print" },
+      { titulo: "Print: No-Face",    descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "noface sem rosto print" },
+      { titulo: "Print: Poppy Cat",  descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "poppycat gato print" },
+      { titulo: "Print: Rafaela",    descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "rafaela print" }
+    ];
+
+    /* 2) LÓGICA (não precisa mexer) */
+    const campo = document.getElementById("campo-busca");
+    const botao = document.getElementById("botao-busca");
+    const painel = document.getElementById("painel");
+    const lista = document.getElementById("resultados");
+    const aviso = document.getElementById("aviso");
+
+    function normalizar(t) {
+      return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+    function escapar(t) {
+      const d = document.createElement("div");
+      d.textContent = t;
+      return d.innerHTML;
+    }
+    function destacar(texto, termo) {
+      const i = normalizar(texto).indexOf(normalizar(termo));
+      if (i === -1) return escapar(texto);
+      const n = normalizar(termo).length;
+      return escapar(texto.slice(0, i)) + "<mark>" + escapar(texto.slice(i, i + n)) + "</mark>" + escapar(texto.slice(i + n));
+    }
+    function buscarLocal(termo) {
+      const t = normalizar(termo);
+      return dados.filter(item =>
+        normalizar(item.titulo + " " + item.descricao + " " + (item.palavras || "")).includes(t)
+      );
+    }
+
+    /* Quando o banco de dados estiver pronto, use esta função no lugar de buscarLocal.
+       O servidor deve devolver JSON: [{ "titulo": "", "descricao": "", "url": "" }] */
+    async function buscarNoServidor(termo) {
+      const r = await fetch("/api/busca?q=" + encodeURIComponent(termo));
+      if (!r.ok) throw new Error("Erro na busca");
+      return r.json();
+    }
+
+    function fechar() { painel.hidden = true; }
+
+    async function pesquisar() {
+      const termo = campo.value.trim();
+      lista.innerHTML = "";
+      if (termo.length < 2) {
+        if (!termo) { fechar(); return; }
+        aviso.textContent = "Digite pelo menos 2 letras.";
+        painel.hidden = false;
+        return;
+      }
+      try {
+        const achados = buscarLocal(termo);   // com banco: await buscarNoServidor(termo)
+        painel.hidden = false;
+        if (achados.length === 0) {
+          aviso.textContent = "Nada encontrado para \"" + termo + "\".";
+          return;
+        }
+        aviso.textContent = achados.length + (achados.length === 1 ? " resultado" : " resultados");
+        lista.innerHTML = achados.map(item =>
+          '<li><a href="' + encodeURI(item.url) + '">' +
+          "<strong>" + destacar(item.titulo, termo) + "</strong>" +
+          "<span>" + escapar(item.descricao) + "</span></a></li>"
+        ).join("");
+      } catch (e) {
+        painel.hidden = false;
+        aviso.textContent = "Não foi possível buscar agora. Tente novamente.";
+      }
+    }
+
+    let espera;
+    campo.addEventListener("input", () => { clearTimeout(espera); espera = setTimeout(pesquisar, 200); });
+    campo.addEventListener("keydown", e => {
+      if (e.key === "Enter") pesquisar();
+      if (e.key === "Escape") fechar();
+    });
+    botao.addEventListener("click", pesquisar);
+    document.addEventListener("click", e => { if (!e.target.closest(".busca")) fechar(); });
+  </script>
 </body>
 </html>
