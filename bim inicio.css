@@ -1,0 +1,6 @@
+.imagemdefundo{
+    image-rendering: auto;
+    position: absolute;
+    font-variant-position: normal;
+    position: relative; z-index: 30;
+}
