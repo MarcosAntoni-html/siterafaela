@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bim Creates | Login</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="bim inicio.css">
+  <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+<div class="imagemdefundo">
+  <a href="bim creates logos/bacgroud.png"></a>
+</div>
+  <!-- ========== CABEÇALHO ========== -->
+  <header class="topo">
+    <div class="topo-conteudo">
+      <a class="logo" href="bim inicio.html">
+        <img src="bim creates logos/4 png.png" alt="Bim Creates, página inicial">
+      </a>
+
+      <!-- Busca funcional -->
+      <div class="busca" role="search">
+        <div class="busca-campo">
+          <input type="search" id="campo-busca" placeholder="Buscar no site" aria-label="Buscar no site" autocomplete="off">
+          <button type="button" id="botao-busca">Buscar</button>
+        </div>
+        <div class="painel" id="painel" hidden>
+          <p class="aviso" id="aviso" aria-live="polite"></p>
+          <ul class="resultados" id="resultados"></ul>
+        </div>
+      </div>
+
+      <div class="acoes">
+        <a class="acao" href="login.html">
+          <img src="bim creates logos/logos/icon login.png" alt="">
+          <span>Login</span>
+        </a>
+        <a class="acao" href="carrinho.html">
+          <img src="bim creates logos/logos/icon carrinho.png" alt="">
+          <span>Carrinho</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Menu -->
+    <nav aria-label="Menu principal">
+      <ul class="menu">
+        <li><img src="https://em-content.zobj.net/source/animated-noto-color-emoji/461/sparkles_2728.gif" alt=""></li>
+        <li><a href="bim inicio.html">Início</a></li>
+        <li><a href="artes.html">Artes</a></li>
+        <li><a href="Produtos.html">Produtos</a></li>
+        <li><a href="Encomendas.html">Encomendas</a></li>
+        <li><a href="Downloads.html">Downloads</a></li>
+        <li><a href="Sobre mim.html">Sobre mim</a></li>
+        <li><a href="contatos.html">Contatos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- ========== CONTEÚDO ========== -->
+  <main>
+    <h1 class="titulo-secao">Login</h1>
+
+    <div class="caixa-login">
+
+      <!-- Já conectada -->
+      <section class="sessao" id="sessao" hidden>
+        <h2 id="sessao-titulo">Você já está conectada</h2>
+        <p>Sua sessão está ativa neste navegador.</p>
+        <a class="botao-principal" href="bim inicio.html" style="display:block;text-align:center;text-decoration:none">Ir para o início</a>
+        <button type="button" class="botao-principal botao-secundario" id="botao-sair">Sair da conta</button>
+      </section>
+
+      <div id="area-formularios">
+        <!-- Abas -->
+        <div class="abas" role="tablist" aria-label="Entrar ou criar conta">
+          <button type="button" class="aba" role="tab" id="aba-entrar" aria-controls="form-entrar" aria-selected="true">Entrar</button>
+          <button type="button" class="aba" role="tab" id="aba-registrar" aria-controls="form-registrar" aria-selected="false" tabindex="-1">Criar conta</button>
+        </div>
+
+        <!-- ===== ENTRAR ===== -->
+        <form class="form" id="form-entrar" role="tabpanel" aria-labelledby="aba-entrar" novalidate>
+          <h2>Bem-vinda de volta</h2>
+          <p class="intro">Entre para acompanhar seus pedidos e seu carrinho.</p>
+
+          <p class="mensagem" id="msg-entrar" role="alert" hidden></p>
+
+          <div class="campo">
+            <label for="entrar-login">Usuário ou e-mail</label>
+            <input type="text" id="entrar-login" name="login" autocomplete="username" placeholder="seu usuário ou e-mail" required>
+          </div>
+
+          <div class="campo">
+            <label for="entrar-senha">Senha</label>
+            <div class="senha-campo">
+              <input type="password" id="entrar-senha" name="senha" autocomplete="current-password" placeholder="sua senha" required>
+              <button type="button" class="ver-senha" data-alvo="entrar-senha" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="botao-principal">Entrar</button>
+
+          <p class="troca">Ainda não tem conta?
+            <button type="button" class="link-botao" data-ir="registrar">Criar conta</button>
+          </p>
+        </form>
+
+        <!-- ===== REGISTRAR ===== -->
+        <form class="form" id="form-registrar" role="tabpanel" aria-labelledby="aba-registrar" novalidate hidden>
+          <h2>Criar conta</h2>
+          <p class="intro">Leva menos de um minuto.</p>
+
+          <p class="mensagem" id="msg-registrar" role="alert" hidden></p>
+
+          <div class="campo">
+            <label for="reg-usuario">Usuário</label>
+            <input type="text" id="reg-usuario" name="usuario" autocomplete="username" placeholder="ex: bim_artes" required>
+            <p class="dica">Mínimo de 3 caracteres, sem espaços.</p>
+          </div>
+
+          <div class="campo">
+            <label for="reg-email">E-mail</label>
+            <input type="email" id="reg-email" name="email" autocomplete="email" placeholder="voce@email.com" required>
+          </div>
+
+          <div class="campo">
+            <label for="reg-senha">Senha</label>
+            <div class="senha-campo">
+              <input type="password" id="reg-senha" name="senha" autocomplete="new-password" placeholder="mínimo de 8 caracteres" required>
+              <button type="button" class="ver-senha" data-alvo="reg-senha" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+          </div>
+
+          <div class="campo">
+            <label for="reg-confirmar">Confirmar senha</label>
+            <div class="senha-campo">
+              <input type="password" id="reg-confirmar" name="confirmar" autocomplete="new-password" placeholder="repita a senha" required>
+              <button type="button" class="ver-senha" data-alvo="reg-confirmar" aria-label="Mostrar senha">Mostrar</button>
+            </div>
+          </div>
+
+          <button type="submit" class="botao-principal">Criar conta</button>
+
+          <p class="troca">Já tem conta?
+            <button type="button" class="link-botao" data-ir="entrar">Entrar</button>
+          </p>
+        </form>
+      </div>
+    </div>
+  </main>
+
+  <!-- ========== SCRIPTS (sempre no final) ========== -->
+  <script>
+    /* =====================================================
+       LOGIN E CADASTRO
+       ATENÇÃO: sem servidor, as contas ficam salvas só neste
+       navegador (localStorage). Serve para testar o site.
+       Para um site real, troque as funções marcadas com
+       "COM BANCO" por chamadas ao seu servidor.
+       ===================================================== */
+
+    const CHAVE_USUARIOS = "bim_usuarios";
+    const CHAVE_SESSAO = "bim_sessao";
+    const PAGINA_DEPOIS_DO_LOGIN = "bim inicio.html";
+
+    /* ---------- Armazenamento local ---------- */
+    function lerUsuarios() {
+      try { return JSON.parse(localStorage.getItem(CHAVE_USUARIOS)) || []; }
+      catch (e) { return []; }
+    }
+    function salvarUsuarios(lista) {
+      localStorage.setItem(CHAVE_USUARIOS, JSON.stringify(lista));
+    }
+    function lerSessao() {
+      try { return JSON.parse(localStorage.getItem(CHAVE_SESSAO)); }
+      catch (e) { return null; }
+    }
+
+    /* ---------- Senha: nunca guardamos o texto puro ---------- */
+    function aleatorio() {
+      const b = new Uint8Array(16);
+      crypto.getRandomValues(b);
+      return Array.from(b, x => x.toString(16).padStart(2, "0")).join("");
+    }
+    async function gerarHash(senha, sal) {
+      const texto = sal + ":" + senha;
+      if (window.crypto && crypto.subtle) {
+        const dados = new TextEncoder().encode(texto);
+        const h = await crypto.subtle.digest("SHA-256", dados);
+        return Array.from(new Uint8Array(h), x => x.toString(16).padStart(2, "0")).join("");
+      }
+      /* alternativa simples para navegadores sem suporte */
+      let h = 5381;
+      for (let i = 0; i < texto.length; i++) h = ((h << 5) + h + texto.charCodeAt(i)) | 0;
+      return "x" + h;
+    }
+
+    /* ---------- COM BANCO: cadastro ---------- */
+    async function cadastrar(usuario, email, senha) {
+      const lista = lerUsuarios();
+      const u = usuario.toLowerCase();
+      const e = email.toLowerCase();
+      if (lista.some(x => x.usuario.toLowerCase() === u)) throw new Error("Esse usuário já existe. Escolha outro.");
+      if (lista.some(x => x.email.toLowerCase() === e)) throw new Error("Esse e-mail já está cadastrado.");
+      const sal = aleatorio();
+      lista.push({ usuario, email, sal, hash: await gerarHash(senha, sal) });
+      salvarUsuarios(lista);
+      return { usuario, email };
+    }
+
+    /* ---------- COM BANCO: entrada ---------- */
+    async function autenticar(login, senha) {
+      const l = login.toLowerCase();
+      const conta = lerUsuarios().find(x => x.usuario.toLowerCase() === l || x.email.toLowerCase() === l);
+      if (!conta || (await gerarHash(senha, conta.sal)) !== conta.hash) {
+        throw new Error("Usuário ou senha incorretos.");
+      }
+      return { usuario: conta.usuario, email: conta.email };
+    }
+
+    /* ---------- Elementos ---------- */
+    const abaEntrar = document.getElementById("aba-entrar");
+    const abaRegistrar = document.getElementById("aba-registrar");
+    const formEntrar = document.getElementById("form-entrar");
+    const formRegistrar = document.getElementById("form-registrar");
+    const msgEntrar = document.getElementById("msg-entrar");
+    const msgRegistrar = document.getElementById("msg-registrar");
+    const areaFormularios = document.getElementById("area-formularios");
+    const areaSessao = document.getElementById("sessao");
+
+    /* ---------- Abas ---------- */
+    function trocarAba(qual, focar) {
+      const entrar = qual === "entrar";
+      abaEntrar.setAttribute("aria-selected", entrar);
+      abaRegistrar.setAttribute("aria-selected", !entrar);
+      abaEntrar.tabIndex = entrar ? 0 : -1;
+      abaRegistrar.tabIndex = entrar ? -1 : 0;
+      formEntrar.hidden = !entrar;
+      formRegistrar.hidden = entrar;
+      if (focar) (entrar ? abaEntrar : abaRegistrar).focus();
+    }
+    abaEntrar.addEventListener("click", () => trocarAba("entrar"));
+    abaRegistrar.addEventListener("click", () => trocarAba("registrar"));
+    [abaEntrar, abaRegistrar].forEach(aba => aba.addEventListener("keydown", e => {
+      if (e.key === "ArrowRight" || e.key === "ArrowLeft") {
+        trocarAba(aba === abaEntrar ? "registrar" : "entrar", true);
+      }
+    }));
+    document.querySelectorAll("[data-ir]").forEach(b =>
+      b.addEventListener("click", () => trocarAba(b.dataset.ir, false))
+    );
+
+    /* ---------- Mostrar / ocultar senha ---------- */
+    document.querySelectorAll(".ver-senha").forEach(b => b.addEventListener("click", () => {
+      const campo = document.getElementById(b.dataset.alvo);
+      const mostrar = campo.type === "password";
+      campo.type = mostrar ? "text" : "password";
+      b.textContent = mostrar ? "Ocultar" : "Mostrar";
+      b.setAttribute("aria-label", mostrar ? "Ocultar senha" : "Mostrar senha");
+    }));
+
+    /* ---------- Mensagens ---------- */
+    function mostrarMensagem(el, texto, tipo) {
+      el.textContent = texto;
+      el.className = "mensagem " + tipo;
+      el.hidden = false;
+    }
+    function limparErros(form) {
+      form.querySelectorAll("input").forEach(i => i.removeAttribute("aria-invalid"));
+    }
+    function marcarErro(input) { input.setAttribute("aria-invalid", "true"); input.focus(); }
+
+    /* ---------- Sessão ---------- */
+    function atualizarTela() {
+      const sessao = lerSessao();
+      areaFormularios.hidden = !!sessao;
+      areaSessao.hidden = !sessao;
+      if (sessao) {
+        document.getElementById("sessao-titulo").textContent = "Olá, " + sessao.usuario + "!";
+      }
+    }
+    document.getElementById("botao-sair").addEventListener("click", () => {
+      localStorage.removeItem(CHAVE_SESSAO);
+      atualizarTela();
+    });
+
+    /* ---------- Enviar: entrar ---------- */
+    formEntrar.addEventListener("submit", async e => {
+      e.preventDefault();
+      limparErros(formEntrar);
+      msgEntrar.hidden = true;
+      const login = document.getElementById("entrar-login");
+      const senha = document.getElementById("entrar-senha");
+
+      if (!login.value.trim()) { mostrarMensagem(msgEntrar, "Digite seu usuário ou e-mail.", "erro"); return marcarErro(login); }
+      if (!senha.value) { mostrarMensagem(msgEntrar, "Digite sua senha.", "erro"); return marcarErro(senha); }
+
+      const botao = formEntrar.querySelector("button[type=submit]");
+      botao.disabled = true;
+      try {
+        const conta = await autenticar(login.value.trim(), senha.value);
+        localStorage.setItem(CHAVE_SESSAO, JSON.stringify(conta));
+        mostrarMensagem(msgEntrar, "Tudo certo! Entrando…", "ok");
+        setTimeout(() => { window.location.href = PAGINA_DEPOIS_DO_LOGIN; }, 700);
+      } catch (erro) {
+        mostrarMensagem(msgEntrar, erro.message, "erro");
+        senha.value = "";
+        senha.focus();
+        botao.disabled = false;
+      }
+    });
+
+    /* ---------- Enviar: registrar ---------- */
+    formRegistrar.addEventListener("submit", async e => {
+      e.preventDefault();
+      limparErros(formRegistrar);
+      msgRegistrar.hidden = true;
+      const usuario = document.getElementById("reg-usuario");
+      const email = document.getElementById("reg-email");
+      const senha = document.getElementById("reg-senha");
+      const confirmar = document.getElementById("reg-confirmar");
+
+      const nome = usuario.value.trim();
+      if (nome.length < 3 || /\s/.test(nome)) {
+        mostrarMensagem(msgRegistrar, "O usuário precisa ter 3 caracteres ou mais, sem espaços.", "erro");
+        return marcarErro(usuario);
+      }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+        mostrarMensagem(msgRegistrar, "Digite um e-mail válido.", "erro");
+        return marcarErro(email);
+      }
+      if (senha.value.length < 8) {
+        mostrarMensagem(msgRegistrar, "A senha precisa ter pelo menos 8 caracteres.", "erro");
+        return marcarErro(senha);
+      }
+      if (senha.value !== confirmar.value) {
+        mostrarMensagem(msgRegistrar, "As senhas não são iguais.", "erro");
+        return marcarErro(confirmar);
+      }
+
+      const botao = formRegistrar.querySelector("button[type=submit]");
+      botao.disabled = true;
+      try {
+        const conta = await cadastrar(nome, email.value.trim(), senha.value);
+        localStorage.setItem(CHAVE_SESSAO, JSON.stringify(conta));
+        mostrarMensagem(msgRegistrar, "Conta criada! Entrando…", "ok");
+        setTimeout(() => { window.location.href = PAGINA_DEPOIS_DO_LOGIN; }, 900);
+      } catch (erro) {
+        mostrarMensagem(msgRegistrar, erro.message, "erro");
+        botao.disabled = false;
+      }
+    });
+
+    atualizarTela();
+
+    /* =====================================================
+       BUSCA (igual às outras páginas)
+       ===================================================== */
+
+    /* 1) DADOS DA BUSCA: edite e acrescente o que quiser.
+          "palavras" são termos extras que também levam ao resultado. */
+    const dados = [
+      { titulo: "Início",      descricao: "Página inicial da Bim Creates.",          url: "bim inicio.html", palavras: "home principal" },
+      { titulo: "Artes",       descricao: "Galeria com as artes e ilustrações.",     url: "artes.html",      palavras: "ilustracao desenho galeria" },
+      { titulo: "Produtos",    descricao: "Veja os produtos disponíveis.",           url: "Produtos.html",   palavras: "loja comprar" },
+      { titulo: "Encomendas",  descricao: "Peça uma arte ou produto personalizado.", url: "Encomendas.html", palavras: "pedido personalizado comissao" },
+      { titulo: "Downloads",   descricao: "Arquivos para baixar.",                   url: "Downloads.html",  palavras: "baixar wallpaper arquivos" },
+      { titulo: "Sobre mim",   descricao: "Conheça a artista por trás da marca.",    url: "Sobre mim.html",  palavras: "quem sou historia artista" },
+      { titulo: "Contatos",    descricao: "Fale comigo por redes sociais ou e-mail.", url: "contatos.html",  palavras: "contato email instagram whatsapp" },
+      { titulo: "Login",       descricao: "Entre na sua conta.",                     url: "login.html",      palavras: "entrar conta minha conta registrar cadastro" },
+      { titulo: "Carrinho",    descricao: "Veja os itens do seu carrinho.",          url: "carrinho.html",   palavras: "compras pedido" },
+      { titulo: "Print: Bode",       descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "bode print" },
+      { titulo: "Print: Leite",      descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "leite print" },
+      { titulo: "Print: No-Face",    descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "noface sem rosto print" },
+      { titulo: "Print: Poppy Cat",  descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "poppycat gato print" },
+      { titulo: "Print: Rafaela",    descricao: "Print disponível na seção de artes.", url: "artes.html", palavras: "rafaela print" }
+    ];
+
+    /* 2) LÓGICA (não precisa mexer) */
+    const campo = document.getElementById("campo-busca");
+    const botaoBusca = document.getElementById("botao-busca");
+    const painel = document.getElementById("painel");
+    const lista = document.getElementById("resultados");
+    const aviso = document.getElementById("aviso");
+
+    function normalizar(t) {
+      return t.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+    }
+    function escapar(t) {
+      const d = document.createElement("div");
+      d.textContent = t;
+      return d.innerHTML;
+    }
+    function destacar(texto, termo) {
+      const i = normalizar(texto).indexOf(normalizar(termo));
+      if (i === -1) return escapar(texto);
+      const n = normalizar(termo).length;
+      return escapar(texto.slice(0, i)) + "<mark>" + escapar(texto.slice(i, i + n)) + "</mark>" + escapar(texto.slice(i + n));
+    }
+    function buscarLocal(termo) {
+      const t = normalizar(termo);
+      return dados.filter(item =>
+        normalizar(item.titulo + " " + item.descricao + " " + (item.palavras || "")).includes(t)
+      );
+    }
+
+    /* Quando o banco de dados estiver pronto, use esta função no lugar de buscarLocal.
+       O servidor deve devolver JSON: [{ "titulo": "", "descricao": "", "url": "" }] */
+    async function buscarNoServidor(termo) {
+      const r = await fetch("/api/busca?q=" + encodeURIComponent(termo));
+      if (!r.ok) throw new Error("Erro na busca");
+      return r.json();
+    }
+
+    function fechar() { painel.hidden = true; }
+
+    async function pesquisar() {
+      const termo = campo.value.trim();
+      lista.innerHTML = "";
+      if (termo.length < 2) {
+        if (!termo) { fechar(); return; }
+        aviso.textContent = "Digite pelo menos 2 letras.";
+        painel.hidden = false;
+        return;
+      }
+      try {
+        const achados = buscarLocal(termo);   // com banco: await buscarNoServidor(termo)
+        painel.hidden = false;
+        if (achados.length === 0) {
+          aviso.textContent = "Nada encontrado para \"" + termo + "\".";
+          return;
+        }
+        aviso.textContent = achados.length + (achados.length === 1 ? " resultado" : " resultados");
+        lista.innerHTML = achados.map(item =>
+          '<li><a href="' + encodeURI(item.url) + '">' +
+          "<strong>" + destacar(item.titulo, termo) + "</strong>" +
+          "<span>" + escapar(item.descricao) + "</span></a></li>"
+        ).join("");
+      } catch (e) {
+        painel.hidden = false;
+        aviso.textContent = "Não foi possível buscar agora. Tente novamente.";
+      }
+    }
+
+    let espera;
+    campo.addEventListener("input", () => { clearTimeout(espera); espera = setTimeout(pesquisar, 200); });
+    campo.addEventListener("keydown", e => {
+      if (e.key === "Enter") pesquisar();
+      if (e.key === "Escape") fechar();
+    });
+    botaoBusca.addEventListener("click", pesquisar);
+    document.addEventListener("click", e => { if (!e.target.closest(".busca")) fechar(); });
+  </script>
+</body>
+</html>
