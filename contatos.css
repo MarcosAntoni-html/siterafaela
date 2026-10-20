@@ -1,1 +1,274 @@
+/* =====================================================
+   contato.css  |  Bim Creates
+   Estilo da página de contatos.
+   Inclui o cabeçalho, a busca e o menu (iguais às outras páginas).
+   ===================================================== */
 
+/* ========== CORES E BASE ========== */
+:root {
+  --rosa: #ffeff7;
+  --roxo: #dabbe0;
+  --fundo: #7f309e;
+  --texto: #5e3570;
+  --suave: #7a6584;
+  --borda: #2a298f;
+  --marca: #fff1a8;
+  --hover: #593468;
+  --ok: #1d7a4d;
+}
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: "Fredoka", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background: var(--fundo);
+  color: var(--texto);
+}
+a { color: inherit; text-decoration: none; }
+a:focus-visible, button:focus-visible, input:focus-visible {
+  outline: 3px solid #ae4cbb; outline-offset: 2px;
+}
+
+/* ========== CABEÇALHO ========== */
+.topo {
+  background: linear-gradient(120deg, var(--rosa), var(--roxo));
+  color: #57124d;
+  position: relative;
+  z-index: 20;
+}
+.topo-conteudo {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 14px 20px;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.logo img { display: block; height: 90px; width: 90px; object-fit: contain; }
+
+.acoes { display: flex; gap: 18px; margin-left: auto; }
+.acao { display: flex; align-items: center; gap: 8px; font-weight: 500; }
+.acao img { height: 38px; width: 38px; object-fit: contain; }
+.acao:hover span { text-decoration: underline; }
+
+/* ========== BARRA DE BUSCA ========== */
+.busca { position: relative; flex: 1; max-width: 520px; }
+.busca-campo {
+  display: flex;
+  background: #fff;
+  border-radius: 999px;
+  padding: 4px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, .15);
+}
+.busca input {
+  flex: 1;
+  min-width: 0;
+  border: 0;
+  background: transparent;
+  padding: 10px 16px;
+  font: inherit;
+  color: var(--texto);
+}
+.busca input:focus-visible { outline: none; }
+.busca-campo:focus-within { outline: 3px solid #935ec5; outline-offset: 2px; }
+.busca button {
+  border: 0;
+  border-radius: 999px;
+  padding: 0 22px;
+  font: inherit;
+  font-weight: 500;
+  color: #380864;
+  background: var(--rosa);
+  cursor: pointer;
+}
+.busca button:hover { background: #8e1757; }
+.busca button:focus-visible { outline-color: var(--texto); }
+
+.painel {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  background: #fff;
+  color: var(--texto);
+  border-radius: 16px;
+  box-shadow: 0 12px 30px rgba(60, 10, 70, .25);
+  overflow: hidden;
+}
+.painel[hidden] { display: none; }
+.aviso { margin: 0; padding: 12px 16px; font-size: .9rem; color: var(--suave); }
+.resultados { list-style: none; margin: 0; padding: 0; max-height: 340px; overflow-y: auto; }
+.resultados li { border-top: 1px solid var(--borda); }
+.resultados a { display: block; padding: 12px 16px; }
+.resultados a:hover, .resultados a:focus { background: var(--hover); outline: none; }
+.resultados strong { display: block; font-weight: 500; }
+.resultados span { font-size: .88rem; color: var(--suave); }
+.resultados mark { background: var(--marca); color: inherit; border-radius: 3px; padding: 0 2px; }
+
+/* ========== MENU ========== */
+.menu {
+  list-style: none;
+  margin: 0;
+  padding: 10px 20px 16px;
+  max-width: 1200px;
+  margin-inline: auto;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.menu a {
+  display: block;
+  padding: 8px 18px;
+  border-radius: 999px;
+  font-weight: 500;
+  background: rgba(255, 255, 255, .16);
+  transition: background .15s;
+}
+.menu a:hover { background: rgba(255, 255, 255, .32); }
+.menu a[aria-current="page"] { background: rgba(255, 255, 255, .45); }
+.menu img { height: 25px; width: auto; }
+
+/* ========== CONTEÚDO ========== */
+main { max-width: 1200px; margin: 0 auto; padding: 40px 20px 60px; }
+.titulo-secao {
+  margin: 0 0 24px;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  color: var(--rosa);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.titulo-secao::after { content: ""; flex: 1; height: 4px; border-radius: 4px; background: linear-gradient(90deg, var(--roxo), transparent); }
+.subtitulo {
+  margin: 48px 0 8px;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 600;
+  color: var(--rosa);
+}
+.legenda { margin: 0 0 22px; color: var(--roxo); }
+
+/* ========== CARTÕES BASE ========== */
+.cartao {
+  background: #fff;
+  border: 2px solid var(--borda);
+  border-radius: 20px;
+  box-shadow: 0 6px 18px rgba(172, 29, 107, .08);
+}
+
+/* ========== NÚMERO COMERCIAL E E-MAIL ========== */
+.contato-direto { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+.info { padding: 26px; display: flex; flex-direction: column; }
+.info h2 { margin: 0 0 4px; font-size: 1.3rem; font-weight: 600; color: var(--texto); }
+.info .sobre { margin: 0 0 16px; color: var(--suave); font-size: .95rem; }
+.dado {
+  margin: 0 0 6px;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 600;
+  color: var(--fundo);
+  word-break: break-word;
+}
+.horario { margin: 0 0 20px; font-size: .92rem; color: var(--suave); }
+.botoes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+
+.botao {
+  display: inline-block;
+  padding: 11px 22px;
+  border: 2px solid transparent;
+  border-radius: 999px;
+  font: inherit;
+  font-weight: 600;
+  text-align: center;
+  cursor: pointer;
+  transition: background .15s;
+}
+.botao-cheio { color: var(--rosa); background: var(--fundo); }
+.botao-cheio:hover { background: var(--hover); }
+.botao-claro { color: var(--texto); background: var(--rosa); border-color: var(--roxo); }
+.botao-claro:hover { background: var(--roxo); }
+.botao-whats { color: #fff; background: #1f9d55; }
+.botao-whats:hover { background: #167a42; }
+.copiado { color: var(--ok); border-color: #a9dcc0; background: #e3f6ec; }
+
+/* ========== REDES SOCIAIS (DESTAQUE) ========== */
+.redes {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 24px;
+}
+.redes li { grid-column: span 2; }
+.redes li:nth-child(n+4) { grid-column: span 3; }
+
+.rede {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 30px 20px 26px;
+  text-align: center;
+  transition: transform .15s, box-shadow .15s;
+}
+.rede:hover { transform: translateY(-4px); box-shadow: 0 12px 26px rgba(40, 8, 55, .3); }
+.rede:focus-visible { outline-offset: 3px; }
+
+.icone {
+  width: 84px;
+  height: 84px;
+  margin-bottom: 8px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 2.6rem;
+  font-weight: 600;
+  line-height: 1;
+}
+.icone svg { width: 46px; height: 46px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.icone svg .cheio { fill: currentColor; stroke: none; }
+
+.rede-facebook .icone  { background: #1877f2; }
+.rede-instagram .icone { background: linear-gradient(45deg, #f9a03f, #e1306c 55%, #7b3fd0); }
+.rede-twitter .icone   { background: #14171a; }
+.rede-youtube .icone   { background: #e62117; }
+.rede-twitch .icone    { background: #9146ff; }
+
+.rede strong { font-size: 1.3rem; font-weight: 600; color: var(--texto); }
+.rede .usuario { font-size: .95rem; color: var(--suave); word-break: break-word; }
+.rede .visitar {
+  margin-top: 10px;
+  padding: 7px 18px;
+  border-radius: 999px;
+  font-size: .9rem;
+  font-weight: 600;
+  color: var(--texto);
+  background: var(--rosa);
+  border: 2px solid var(--roxo);
+}
+.rede:hover .visitar { background: var(--roxo); }
+
+/* ========== CELULAR ========== */
+@media (max-width: 900px) {
+  .contato-direto { grid-template-columns: 1fr; }
+  .redes { grid-template-columns: 1fr 1fr; gap: 16px; }
+  .redes li, .redes li:nth-child(n+4) { grid-column: span 1; }
+  .redes li:last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 760px) {
+  .topo-conteudo { flex-wrap: wrap; }
+  .busca { order: 3; flex-basis: 100%; max-width: none; }
+  .logo img { height: 70px; width: 70px; }
+  .info { padding: 22px 18px; }
+}
+@media (max-width: 480px) {
+  .redes { grid-template-columns: 1fr; }
+  .redes li:last-child { grid-column: auto; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .menu a, .botao, .rede { transition: none; }
+  .rede:hover { transform: none; }
+}
